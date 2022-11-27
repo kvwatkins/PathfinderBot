@@ -4,8 +4,12 @@
     <TargetFramework>net7.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <UserSecretsId>e90b1a72-baba-453b-9d57-6b3fc563fd20</UserSecretsId>
   </PropertyGroup>
   <ItemGroup>
+    <None Update="appsettings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <PackageReference Include="LanguageExt.Core" Version="4.4.0"/>
     <PackageReference Include="Discord.Net" Version="3.8.1"/>
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="7.0.0"/>
@@ -16,5 +20,8 @@
     <PackageReference Include="Serilog.Sinks.Console" Version="4.1.0"/>
     <PackageReference Include="Serilog.Extensions.Logging" Version="3.1.0"/>
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="7.0.0"/>
+    <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="7.0.0"/>
+    <PackageReference Include="System.Text.Json" Version="7.0.0"/>
+    <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="7.0.0"/>
   </ItemGroup>
 </Project>
