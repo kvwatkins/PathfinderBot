@@ -11,34 +11,34 @@ namespace Models.Configuration
 
     public class DiscordConfig
     {
-        [JsonPropertyName("Application")]
+        [JsonPropertyName("application")]
         public Application Application { get; set; }
 
-        [JsonPropertyName("Bot")]
+        [JsonPropertyName("bot")]
         public Bot Bot { get; set; }
     }
 
     public class Application
     {
-        [JsonPropertyName("AppId")]
+        [JsonPropertyName("appId")]
         public string AppId { get; set; }
 
-        [JsonPropertyName("PublicKey")]
+        [JsonPropertyName("publicKey")]
         public string PublicKey { get; set; }
     }
 
     public class Bot
     {
-        [JsonPropertyName("Token")]
+        [JsonPropertyName("token")]
         public string Token { get; set; }
 
-        [JsonPropertyName("ClientId")]
+        [JsonPropertyName("clientId")]
         public string ClientId { get; set; }
 
-        [JsonPropertyName("ClientSecret")]
+        [JsonPropertyName("clientSecret")]
         public string ClientSecret { get; set; }
 
-        [JsonPropertyName("Url")]
+        [JsonPropertyName("url")]
         public Uri Url { get; set; }
     }
 }

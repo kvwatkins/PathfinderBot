@@ -2,6 +2,7 @@ using Discord;
 using Discord.WebSocket;
 using System.Threading.Tasks;
 using Models.Configuration;
+using Microsoft.Extensions.Options;
 
 namespace Pathfinder.Sdk
 {
@@ -10,9 +11,9 @@ namespace Pathfinder.Sdk
         private readonly DiscordSocketClient _client;
         private readonly Models.Configuration.DiscordConfig _config;
 
-        public Pf2eBot(Models.Configuration.DiscordConfig config)
+        public Pf2eBot(IOptions<Models.Configuration.DiscordConfig> config)
         {
-            _config = config;
+            _config = config.Value ?? throw new ArgumentNullException(nameof(config));
             _client = new DiscordSocketClient();
         }
 

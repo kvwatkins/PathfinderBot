@@ -21,9 +21,8 @@ namespace Pathfinder.Sdk
 
             var serviceProvider = BuildServiceProvider();
 
-            var discordConfig = serviceProvider.GetService<DiscordConfig>();
-            // var bot = serviceProvider.GetService<IPf2eBot>();
-            // await bot.Run();
+            var bot = serviceProvider.GetService<IPf2eBot>();
+            bot.Run().GetAwaiter().GetResult();
 
             Console.WriteLine("Goodbye Cruel World");
         }
