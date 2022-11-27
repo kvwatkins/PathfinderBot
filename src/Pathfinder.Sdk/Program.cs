@@ -5,15 +5,19 @@ using Serilog;
 using Serilog.Sinks.File;
 using System;
 using Models.Configuration;
-
+using Discord.WebSocket;
+using Discord.Commands;
+using Discord.Interactions;
 
 namespace Pathfinder.Sdk
 {
     class Program
     {
-        public static IConfigurationRoot Configuration {get; set;}
+        public static IConfigurationRoot Configuration { get; set; }
 
-        public static void Main(string[] args)
+        public static Task Main(string[] args) => new Program().MainAsync();
+
+        public async Task MainAsync()
         {
             Console.WriteLine("Hello World");
 
@@ -21,8 +25,8 @@ namespace Pathfinder.Sdk
 
             var serviceProvider = BuildServiceProvider();
 
-            var bot = serviceProvider.GetService<IPf2eBot>();
-            bot.Run().GetAwaiter().GetResult();
+            var bot = serviceProvider.GetRequiredService<IPf2eBot>();
+            await bot.Run();
 
             Log.CloseAndFlush();
             Console.WriteLine("Goodbye Cruel World");
@@ -42,6 +46,9 @@ namespace Pathfinder.Sdk
                 .Configure<DiscordConfig>(c => Configuration.GetRequiredSection("discordConfig").Bind(c))
                 .AddOptions()
                 .AddLogging(builder => builder.AddSerilog(dispose: true))
+                .AddSingleton<DiscordSocketClient>()
+                .AddScoped<CommandService>()
+                .AddScoped<InteractionService>()
                 .AddSingleton<IPf2eBot, Pf2eBot>()
                 .BuildServiceProvider();
 
@@ -57,8 +64,8 @@ namespace Pathfinder.Sdk
             var builder = new ConfigurationBuilder()
                 .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
                 .AddJsonFile($"appsettings.Development.json", optional: true, reloadOnChange: true);
-            
-            if(isDevelopment)
+
+            if (isDevelopment)
             {
                 builder.AddUserSecrets<Program>();
             }

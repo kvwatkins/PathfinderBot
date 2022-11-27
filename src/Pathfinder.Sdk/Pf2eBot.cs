@@ -13,18 +13,16 @@ namespace Pathfinder.Sdk
         private readonly Models.Configuration.DiscordConfig _config;
         private readonly ILogger<Pf2eBot> _log;
 
-        public Pf2eBot(IOptions<Models.Configuration.DiscordConfig> config, ILogger<Pf2eBot> log)
+        public Pf2eBot(IOptions<Models.Configuration.DiscordConfig> config, ILogger<Pf2eBot> log,
+            DiscordSocketClient client)
         {
             _config = config.Value ?? throw new ArgumentNullException(nameof(config));
             _log = log;
-            _client = new DiscordSocketClient();
+            _client = client;
         }
 
         public async Task Run()
         {
-            //_client.Log += Log;
-            //_client.MessageReceived += ClientOnMessageReceived;
-
             _log.LogInformation("I am alive!!!");
             
             await _client.LoginAsync(TokenType.Bot, _config.Bot.Token);
