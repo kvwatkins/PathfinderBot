@@ -12,17 +12,18 @@ namespace Pathfinder.Sdk
     class Program
     {
         public static IConfigurationRoot Configuration {get; set;}
-        static void Main(string[] args)
+
+        public static void Main(string[] args)
         {
             Console.WriteLine("Hello World");
 
             Configuration = BuildConfiguration();
 
-            var services = BuildServiceProvider();
+            var serviceProvider = BuildServiceProvider();
 
-            // var token = configuration.GetRequiredSection("Discord");
-            // var pf2eBot = new Pf2eBot();
-            // pf2eBot.Run().GetAwaiter().GetResult();
+            var discordConfig = serviceProvider.GetService<DiscordConfig>();
+            // var bot = serviceProvider.GetService<IPf2eBot>();
+            // await bot.Run();
 
             Console.WriteLine("Goodbye Cruel World");
         }
@@ -34,6 +35,7 @@ namespace Pathfinder.Sdk
             services
                 .Configure<DiscordConfig>(c => Configuration.GetRequiredSection("discordConfig").Bind(c))
                 .AddOptions()
+                .AddSingleton<IPf2eBot, Pf2eBot>()
                 .BuildServiceProvider();
 
             var serviceProvider = services.BuildServiceProvider();
