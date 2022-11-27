@@ -24,16 +24,24 @@ namespace Pathfinder.Sdk
             var bot = serviceProvider.GetService<IPf2eBot>();
             bot.Run().GetAwaiter().GetResult();
 
+            Log.CloseAndFlush();
             Console.WriteLine("Goodbye Cruel World");
         }
 
         private static ServiceProvider BuildServiceProvider()
         {
+            Log.Logger = new LoggerConfiguration()
+                .MinimumLevel.Debug()
+                .WriteTo.Console()
+                .WriteTo.File("logs/log.txt", rollingInterval: RollingInterval.Day)
+                .CreateLogger();
+
             IServiceCollection services = new ServiceCollection();
 
             services
                 .Configure<DiscordConfig>(c => Configuration.GetRequiredSection("discordConfig").Bind(c))
                 .AddOptions()
+                .AddLogging(builder => builder.AddSerilog(dispose: true))
                 .AddSingleton<IPf2eBot, Pf2eBot>()
                 .BuildServiceProvider();
 
