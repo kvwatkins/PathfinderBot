@@ -38,9 +38,10 @@ namespace Pathfinder.Sdk.Handlers
                 }
             };
 
+            _log.LogInformation($"{nameof(CommandHandler)} | Commands");
             foreach (var module in _commands.Modules)
             {
-                _log.LogInformation($"{nameof(CommandHandler)} | Commands, Module {module.Name} initialized");
+                _log.LogInformation($"Module {module.Name} initialized");
             }
         }
 
@@ -50,6 +51,7 @@ namespace Pathfinder.Sdk.Handlers
             var message = messageParam as SocketUserMessage;
             if(message == null)
             {
+                _log.LogInformation("No command message received");
                 return;
             }
 
@@ -60,15 +62,21 @@ namespace Pathfinder.Sdk.Handlers
             if(!(message.HasCharPrefix('!', ref argPos) || message.HasMentionPrefix(_client.CurrentUser, ref argPos))
                 || message.Author.IsBot)
                 {
+                    _log.LogInformation("Ignoring bot message");
                     return;
                 }
             
             // Create Websocket based command context based on message
             var context = new SocketCommandContext(_client, message);
 
-            await _commands.ExecuteAsync(context: context,
+            if (message.HasCharPrefix('!', ref argPos) || message.HasCharPrefix('?', ref argPos))
+            {
+                _log.LogInformation("recieved valid command");
+                await _commands.ExecuteAsync(context: context,
                 argPos: argPos,
                 services: _provider);
+            }
+            
         }
     }
 }
