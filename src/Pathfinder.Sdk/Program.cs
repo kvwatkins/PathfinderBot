@@ -48,10 +48,10 @@ namespace Pathfinder.Sdk
                 .AddOptions()
                 .AddLogging(builder => builder.AddSerilog(dispose: true))
                 .AddSingleton<DiscordSocketClient>()
-                .AddScoped<CommandService>()
-                .AddScoped<InteractionService>()
+                .AddSingleton<CommandService>()
+                .AddSingleton<InteractionService>()
                 .AddSingleton<IPf2eBot, Pf2eBot>()
-                .AddScoped<ICommandHandler, CommandHandler>()
+                .AddSingleton<ICommandHandler, CommandHandler>()
                 .BuildServiceProvider();
 
             var serviceProvider = services.BuildServiceProvider();

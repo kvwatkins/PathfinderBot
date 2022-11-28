@@ -26,8 +26,22 @@ namespace Pathfinder.Sdk.Handlers
             //load modules
             await _commands.AddModulesAsync(assembly: Assembly.GetEntryAssembly(), services: _provider);
 
+            // Subscribe to messages
             _client.MessageReceived += HandleCommandAsync;
 
+            _commands.CommandExecuted += async (optional, context, result) => 
+            {
+                if(!result.IsSuccess && result.Error != CommandError.UnknownCommand)
+                {
+                    // notify user of failure
+                    await context.Channel.SendMessageAsync($"error: {result}");
+                }
+            };
+
+            foreach (var module in _commands.Modules)
+            {
+                _log.LogInformation($"{nameof(CommandHandler)} | Commands, Module {module.Name} initialized");
+            }
         }
 
         private async Task HandleCommandAsync(SocketMessage messageParam)
