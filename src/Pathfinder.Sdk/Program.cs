@@ -8,6 +8,7 @@ using Models.Configuration;
 using Discord.WebSocket;
 using Discord.Commands;
 using Discord.Interactions;
+using Pathfinder.Sdk.Handlers;
 
 namespace Pathfinder.Sdk
 {
@@ -50,6 +51,7 @@ namespace Pathfinder.Sdk
                 .AddScoped<CommandService>()
                 .AddScoped<InteractionService>()
                 .AddSingleton<IPf2eBot, Pf2eBot>()
+                .AddScoped<ICommandHandler, CommandHandler>()
                 .BuildServiceProvider();
 
             var serviceProvider = services.BuildServiceProvider();
