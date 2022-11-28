@@ -8,6 +8,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pathfinder.Sdk", "src\Pathf
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pathfinder.Sdk.Tests", "tests\Pathfinder.Sdk.Tests\Pathfinder.Sdk.Tests.csproj", "{847A0286-BB2F-4235-88C6-810CA0923D25}"
 EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Pathfinder.CharacterBuilder", "src\Pathfinder.CharacterBuilder\Pathfinder.CharacterBuilder.fsproj", "{DA6B5E54-11DB-4DC5-A97C-502D3F3970D2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -16,6 +18,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{A5AAF2C9-2FBF-4AD1-BCAA-86CBC8A15764} = {11954C13-4BBF-4CC9-A61F-538E7F51157A}
 		{847A0286-BB2F-4235-88C6-810CA0923D25} = {DE5E264E-8213-43A6-94F9-8FB7E337BBDF}
+		{DA6B5E54-11DB-4DC5-A97C-502D3F3970D2} = {11954C13-4BBF-4CC9-A61F-538E7F51157A}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{A5AAF2C9-2FBF-4AD1-BCAA-86CBC8A15764}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -26,5 +29,9 @@ Global
 		{847A0286-BB2F-4235-88C6-810CA0923D25}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{847A0286-BB2F-4235-88C6-810CA0923D25}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{847A0286-BB2F-4235-88C6-810CA0923D25}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DA6B5E54-11DB-4DC5-A97C-502D3F3970D2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DA6B5E54-11DB-4DC5-A97C-502D3F3970D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DA6B5E54-11DB-4DC5-A97C-502D3F3970D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DA6B5E54-11DB-4DC5-A97C-502D3F3970D2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
