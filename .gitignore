@@ -5,3 +5,5 @@ riderModule.iml
 /_ReSharper.Caches/
 .vscode
 src/Pathfinder.Sdk/logs
+.idea/
+PathfinderBot.sln.DotSettings.user
