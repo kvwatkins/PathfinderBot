@@ -59,12 +59,11 @@ namespace Pathfinder.Sdk.Handlers
             int argPos = 0;
 
             //ignore bots
-            if(!(message.HasCharPrefix('!', ref argPos) || message.HasMentionPrefix(_client.CurrentUser, ref argPos))
-                || message.Author.IsBot)
-                {
-                    _log.LogInformation("Ignoring bot message");
-                    return;
-                }
+            if(message.Author.IsBot)
+            {
+                _log.LogInformation("Ignoring bot message");
+                return;
+            }
             
             // Create Websocket based command context based on message
             var context = new SocketCommandContext(_client, message);

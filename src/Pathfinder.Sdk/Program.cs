@@ -4,11 +4,13 @@ using Microsoft.Extensions.Logging;
 using Serilog;
 using Serilog.Sinks.File;
 using System;
-using Models.Configuration;
+using Discord;
 using Discord.WebSocket;
 using Discord.Commands;
 using Discord.Interactions;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using Pathfinder.Sdk.Handlers;
+using DiscordConfig = Models.Configuration.DiscordConfig;
 
 namespace Pathfinder.Sdk
 {
@@ -40,14 +42,14 @@ namespace Pathfinder.Sdk
                 .WriteTo.Console()
                 .WriteTo.File("logs/log.txt", rollingInterval: RollingInterval.Day)
                 .CreateLogger();
-
+            
             IServiceCollection services = new ServiceCollection();
 
             services
                 .Configure<DiscordConfig>(c => Configuration.GetRequiredSection("discordConfig").Bind(c))
                 .AddOptions()
                 .AddLogging(builder => builder.AddSerilog(dispose: true))
-                .AddSingleton<DiscordSocketClient>()
+                .AddSingleton<DiscordSocketClient>(_ => new DiscordSocketClient(new DiscordSocketConfig(){GatewayIntents = GatewayIntents.All}))
                 .AddSingleton<CommandService>()
                 .AddSingleton<InteractionService>()
                 .AddSingleton<IPf2eBot, Pf2eBot>()
