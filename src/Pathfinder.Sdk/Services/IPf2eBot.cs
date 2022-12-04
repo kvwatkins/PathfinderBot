@@ -1,4 +1,4 @@
-namespace Pathfinder.Sdk
+namespace Pathfinder.Sdk.Services
 {
     public interface IPf2eBot
     {

@@ -7,7 +7,7 @@ using Microsoft.Extensions.Logging;
 using Pathfinder.Sdk.Handlers;
 using Discord.Commands;
 
-namespace Pathfinder.Sdk
+namespace Pathfinder.Sdk.Services
 {
     internal class Pf2eBot : IPf2eBot
     {

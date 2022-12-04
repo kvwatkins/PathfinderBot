@@ -11,6 +11,7 @@ using Discord.Interactions;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Pathfinder.Sdk.Handlers;
 using DiscordConfig = Models.Configuration.DiscordConfig;
+using Pathfinder.Sdk.Services;
 
 namespace Pathfinder.Sdk
 {
